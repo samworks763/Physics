@@ -3,215 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electric Field Due to Charged Disk - Ultimate Interactive Guide</title>
+    <title>Electric Field Due to Charged Disk - Ultimate Fun Guide</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- KaTeX CSS & JS for Perfect Math Rendering -->
+    <!-- KaTeX CSS & JS for Math Rendering -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
-        .math-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 0.75rem; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0b0f19; color: #f1f5f9; }
+        .symbol-card { transition: all 0.2s ease-in-out; }
+        .symbol-card:hover { transform: translateY(-3px); }
+        .math-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; padding: 0.85rem; }
     </style>
 </head>
-<body class="min-h-screen pb-12">
+<body class="min-h-screen pb-16">
 
-    <!-- Header -->
-    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-lg">
+    <!-- Top Header -->
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 shadow-xl">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div>
-                <h1 class="text-2xl font-bold text-blue-400">⚡ Electric Field Due to Charged Disk</h1>
-                <p class="text-xs text-slate-400">Zero se Level 100 tak Step-by-Step Graphical Explanation</p>
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">⚡</span>
+                <div>
+                    <h1 class="text-xl font-extrabold text-blue-400 tracking-wide">Electric Field Due to Charged Disk</h1>
+                    <p class="text-xs text-slate-400">Zero Jargon • Step-by-Step Interactive Guide</p>
+                </div>
             </div>
             <div class="flex items-center gap-3">
-                <span class="bg-blue-900/60 border border-blue-600 text-blue-300 text-xs font-semibold px-3 py-1.5 rounded-lg shadow">
+                <span class="bg-blue-950 border border-blue-600/60 text-blue-300 text-xs font-semibold px-3 py-1.5 rounded-lg shadow">
                     ✨ Made by Subhan
                 </span>
-                <button id="langToggle" onclick="toggleLanguage()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow">
+                <button id="langToggle" onclick="toggleLanguage()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-3.5 py-1.5 rounded-lg transition shadow">
                     🌐 Switch to English
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        <!-- Left Sticky Column: Interactive Canvas & Sliders -->
-        <div class="lg:col-span-5 flex flex-col gap-6">
-            
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 shadow-xl sticky top-24">
-                <div class="flex justify-between items-center mb-3">
-                    <h2 class="text-sm font-semibold text-slate-200">Interactive 2D/3D Canvas</h2>
-                    <span class="text-xs bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-700">Live Simulation</span>
-                </div>
+    <main class="max-w-7xl mx-auto px-4 py-8 flex flex-col gap-10">
+
+        <!-- SECTION 1: FUN SYMBOL DECODER -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl">
+            <div class="mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-indigo-400 bg-indigo-950 px-3 py-1 rounded-full border border-indigo-800">Must Read First</span>
+                <h2 class="text-2xl font-extrabold text-slate-100 mt-2 content-item"
+                    data-en="🧩 Symbol Decoder: What Do All These Letters Mean?"
+                    data-ur="🧩 Symbol Decoder: Yeh Saare Alfaz Aur Nishan Kya Hain?">
+                    🧩 Symbol Decoder: Yeh Saare Alfaz Aur Nishan Kya Hain?
+                </h2>
+                <p class="text-sm text-slate-400 mt-1 content-item"
+                   data-en="Click on any card or read through to understand physics symbols with simple fun analogies before looking at math!"
+                   data-ur="Math dekhne se pehle in cards ko parh lein taake har symbol ka concept bilkul pani ki tarah saaf ho jaye!">
+                   Math dekhne se pehle in cards ko parh lein taake har symbol ka concept bilkul pani ki tarah saaf ho jaye!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-                <div class="relative w-full aspect-square bg-slate-950 rounded-lg overflow-hidden border border-slate-800">
-                    <canvas id="diskCanvas" width="400" height="400" class="w-full h-full object-contain"></canvas>
+                <!-- Card 1 -->
+                <div class="symbol-card bg-slate-800/90 border border-slate-700/80 rounded-xl p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-2xl font-black text-rose-400 font-mono">d...</span>
+                            <span class="text-xs bg-rose-950 text-rose-300 px-2 py-0.5 rounded border border-rose-800">Small Piece</span>
+                        </div>
+                        <h3 class="font-bold text-slate-200 text-sm mb-1">Chota Tukda (Differential)</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed content-item"
+                           data-en="When 'd' comes before any letter (like dr, dq, dE), it means an insanely small slice of it. Like 1 crumb from a big cake!"
+                           data-ur="Jab bhi kisi lafz ke aage 'd' lag jaye (jaise dr, dq, dE), iska matlab hai us cheez ka boht chota sa tukda! Jaise poore cake me se ek chote se zara.">
+                           Jab bhi kisi lafz ke aage 'd' lag jaye (jaise dr, dq, dE), iska matlab hai us cheez ka boht chota sa tukda! Jaise poore cake me se ek chote se zara.
+                        </p>
+                    </div>
                 </div>
 
-                <!-- Controls -->
-                <div class="mt-4 flex flex-col gap-3">
+                <!-- Card 2 -->
+                <div class="symbol-card bg-slate-800/90 border border-slate-700/80 rounded-xl p-4 flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between text-xs mb-1">
-                            <span class="text-slate-400">Disk Radius (<span class="math-inline">a</span>):</span>
-                            <span id="valA" class="font-mono text-blue-400">5.0 cm</span>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xl font-bold text-amber-400 font-mono">dr & dq</span>
+                            <span class="text-xs bg-amber-950 text-amber-300 px-2 py-0.5 rounded border border-amber-800">Ring & Charge</span>
                         </div>
-                        <input type="range" id="sliderA" min="2" max="8" step="0.5" value="5" class="w-full accent-blue-500 cursor-pointer">
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between text-xs mb-1">
-                            <span class="text-slate-400">Axis Distance (<span class="math-inline">z</span>):</span>
-                            <span id="valZ" class="font-mono text-amber-400">4.0 cm</span>
-                        </div>
-                        <input type="range" id="sliderZ" min="1" max="9" step="0.5" value="4" class="w-full accent-amber-500 cursor-pointer">
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between text-xs mb-1">
-                            <span class="text-slate-400">Active Ring Element Radius (<span class="math-inline">r</span>):</span>
-                            <span id="valR" class="font-mono text-emerald-400">3.0 cm</span>
-                        </div>
-                        <input type="range" id="sliderR" min="0.5" max="5" step="0.1" value="3" class="w-full accent-emerald-500 cursor-pointer">
-                    </div>
-
-                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 flex justify-between items-center mt-2">
-                        <span class="text-xs text-slate-400">Total Field Strength (<span class="math-inline">E</span>):</span>
-                        <span id="fieldResult" class="text-base font-bold font-mono text-emerald-400">Calculating...</span>
+                        <h3 class="font-bold text-slate-200 text-sm mb-1">Ring Thickness & Charge</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed content-item"
+                           data-en="dr = Super thin thickness of 1 ring. dq = Tiny amount of electric charge sitting on that single ring."
+                           data-ur="dr = Ek ring ki bareek si motai (thickness). dq = Us aik ring ke upar mojood chota sa electric charge.">
+                           dr = Ek ring ki bareek si motai (thickness). dq = Us aik ring ke upar mojood chota sa electric charge.
+                        </p>
                     </div>
                 </div>
+
+                <!-- Card 3 -->
+                <div class="symbol-card bg-slate-800/90 border border-slate-700/80 rounded-xl p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xl font-bold text-emerald-400 font-mono">$\sigma$ (Sigma)</span>
+                            <span class="text-xs bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800">Charge Density</span>
+                        </div>
+                        <h3 class="font-bold text-slate-200 text-sm mb-1">Surface Charge Density</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed content-item"
+                           data-en="How tightly packed charges are per 1 cm² area. Like butter spread evenly over toast!"
+                           data-ur="Yeh batata hai ke 1 cm² area me kitna charge phaila hua hai. Jaise bread slice ke upar makkhan barabar phailaya gaya ho.">
+                           Yeh batata hai ke 1 cm² area me kitna charge phaila hua hai. Jaise bread slice ke upar makkhan barabar phailaya gaya ho.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="symbol-card bg-slate-800/90 border border-slate-700/80 rounded-xl p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xl font-bold text-sky-400 font-mono">$\int_0^a$ (Integral)</span>
+                            <span class="text-xs bg-sky-950 text-sky-300 px-2 py-0.5 rounded border border-sky-800">Sum Machine</span>
+                        </div>
+                        <h3 class="font-bold text-slate-200 text-sm mb-1">Summation Machine</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed content-item"
+                           data-en="The long 'S' sign stands for SUM. It adds up all tiny rings from center (0) to outer boundary (a) to give the total answer!"
+                           data-ur="Yeh lamba S wala nishan 'SUM' (jama karne) ke liye hota hai. Yeh center (0) se le kar bahar wahi kinare (a) tak sab rings ko plus kar deta hai.">
+                           Yeh lamba S wala nishan 'SUM' (jama karne) ke liye hota hai. Yeh center (0) se le kar bahar wahi kinare (a) tak sab rings ko plus kar deta hai.
+                        </p>
+                    </div>
+                </div>
+
             </div>
+        </section>
 
-        </div>
-
-        <!-- Right Column: Step-by-Step Simple Explanation -->
-        <div class="lg:col-span-7 flex flex-col gap-6">
+        <!-- SECTION 2: CANVAS & DERIVATION GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <!-- Intro / Base Concept -->
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
-                <h2 class="text-lg font-bold text-blue-400 mb-2 content-item" 
-                    data-en="0. Basic Concept: What is a Charged Disk?" 
-                    data-ur="0. Bunyadi Cheez: Charged Disk Kya Hoti Hai?">
-                    0. Bunyadi Cheez: Charged Disk Kya Hoti Hai?
-                </h2>
-                <p class="text-sm text-slate-300 leading-relaxed content-item"
-                   data-en="Imagine a flat CD or coin where electric charge is evenly spread over its surface. We want to find the total push/pull force (Electric Field) at point P located directly above the center."
-                   data-ur="Aap samjho ke ek flat CD ya coin hai jiske poore surface par charge barabar phaila hua hai. Hum ne is disk ke exact center ke upar (distance z par) point P par total Electric Field (E) ki taqat maloom karni hai.">
-                   Aap samjho ke ek flat CD ya coin hai jiske poore surface par charge barabar phaila hua hai. Hum ne is disk ke exact center ke upar (distance z par) point P par total Electric Field (E) ki taqat maloom karni hai.
-                </p>
-            </div>
-
-            <!-- Step 1 -->
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl border-l-4 border-l-blue-500">
-                <h2 class="text-base font-bold text-blue-400 mb-2 content-item"
-                    data-en="Step 1: Slice Disk into Thin Concentric Rings"
-                    data-ur="Step 1: Disk ko Chote Rings me Torna (Breakdown)">
-                    Step 1: Disk ko Chote Rings me Torna (Breakdown)
-                </h2>
-                <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
-                   data-en="Poori solid disk par ek sath math lagana mushkil hai. Is liye hum maante hain ke disk buhut saare patle patle gol 'Rings' se mil kar bani hai. Ring ka radius 'r' aur width 'dr' hai."
-                   data-ur="Poori solid disk par ek sath math lagana mushkil hai. Is liye hum maante hain ke disk buhut saare patle patle gol 'Rings' se mil kar bani hai. Ring ka radius 'r' aur width 'dr' hai.">
-                   Poori solid disk par ek sath math lagana mushkil hai. Is liye hum maante hain ke disk buhut saare patle patle gol 'Rings' se mil kar bani hai. Ring ka radius 'r' aur width 'dr' hai.
-                </p>
-                <div class="math-box text-center text-amber-300 overflow-x-auto">
-                    $$dq = \sigma \cdot dA = \sigma (2\pi r \, dr)$$
-                </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl border-l-4 border-l-amber-500">
-                <h2 class="text-base font-bold text-amber-400 mb-2 content-item"
-                    data-en="Step 2: Formula for 1 Single Charged Ring"
-                    data-ur="Step 2: Aik Single Charged Ring ki Electric Field">
-                    Step 2: Aik Single Charged Ring ki Electric Field
-                </h2>
-                <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
-                   data-en="Pehle se maloom ring ke formula me hum bas is chote charge 'dq' ki value put karte hain. Note: Side wale components cancel ho jaate hain, bas vertical axis wala component (z) bachta hai!"
-                   data-ur="Pehle se maloom ring ke formula me hum bas is chote charge 'dq' ki value put karte hain. Note: Side wale components cancel ho jaate hain, bas vertical axis wala component (z) bachta hai!">
-                   Pehle se maloom ring ke formula me hum bas is chote charge 'dq' ki value put karte hain. Note: Side wale components cancel ho jaate hain, bas vertical axis wala component (z) bachta hai!
-                </p>
-                <div class="math-box text-center text-amber-300 overflow-x-auto">
-                    $$dE = \frac{k \cdot dq \cdot z}{(z^2 + r^2)^{3/2}} = \frac{k \cdot (\sigma 2\pi r \, dr) \cdot z}{(z^2 + r^2)^{3/2}}$$
-                </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl border-l-4 border-l-emerald-500">
-                <h2 class="text-base font-bold text-emerald-400 mb-2 content-title"
-                    data-en="Step 3: Integrate All Rings from Center (0) to Edge (a)"
-                    data-ur="Step 3: Tamaam Rings ko Center (0) se Kinare (a) tak Jorna (Integration)">
-                    Step 3: Tamaam Rings ko Center (0) se Kinare (a) tak Jorna (Integration)
-                </h2>
-                <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
-                   data-en="Integration ka matlab hai saare rings ki fields ko aapas me plus kar dena. Constant variables ko integration se bahar nikal lete hain."
-                   data-ur="Integration ka matlab hai saare rings ki fields ko aapas me plus kar dena. Constant variables ko integration se bahar nikal lete hain.">
-                   Integration ka matlab hai saare rings ki fields ko aapas me plus kar dena. Constant variables ko integration se bahar nikal lete hain.
-                </p>
-                <div class="math-box text-center text-emerald-300 overflow-x-auto">
-                    $$E = k \sigma (2\pi) z \int_{0}^{a} \frac{r \, dr}{(z^2 + r^2)^{3/2}}$$
-                </div>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl border-l-4 border-l-purple-500">
-                <h2 class="text-base font-bold text-purple-400 mb-2 content-item"
-                    data-en="Step 4 & 5: U-Substitution & Final Result"
-                    data-ur="Step 4 & 5: Simple Integration Solve & Final Result">
-                    Step 4 & 5: Simple Integration Solve & Final Result
-                </h2>
-                <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
-                   data-en="Hum $t = z^2 + r^2$ substitute karte hain jisse integration boht asaan ho jati hai. Value solve karne par final formula milta hai:"
-                   data-ur="Hum $t = z^2 + r^2$ substitute karte hain jisse integration boht asaan ho jati hai. Value solve karne par final formula milta hai:">
-                   Hum $t = z^2 + r^2$ substitute karte hain jisse integration boht asaan ho jati hai. Value solve karne par final formula milta hai:
-                </p>
-                <div class="math-box text-center text-emerald-400 text-base font-bold overflow-x-auto">
-                    $$\vec{E} = \frac{\sigma}{2\varepsilon_0} \left[ 1 - \frac{z}{\sqrt{z^2 + a^2}} \right] \hat{z}$$
-                </div>
-            </div>
-
-            <!-- Why is this Important? Real Life & Cybersecurity -->
-            <div class="bg-gradient-to-r from-slate-800 to-indigo-950 border border-indigo-700 rounded-xl p-6 shadow-2xl">
-                <h2 class="text-xl font-bold text-indigo-300 mb-3 flex items-center gap-2">
-                    🛡️ Yeh Real Life Aur Cybersecurity Me Kyun Zarori Hai?
-                </h2>
-                <p class="text-sm text-slate-300 mb-4 leading-relaxed">
-                    Aap soch rahe honge ke yeh physics ka math Cybersecurity ya Computer Hardware me kahan kaam aata hai? Dehyan se samjhein:
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                    <div class="bg-slate-900/80 p-4 rounded-lg border border-indigo-900/60">
-                        <h3 class="font-bold text-blue-400 text-sm mb-1">1. Hardware & Chip Design (Microprocessors)</h3>
-                        <p class="text-slate-300">Modern CPU chips aur Transistors ke andar circular micro-capacitors aur metal disks hoti hain. Unki electric field calculate kiye bagair microchips burn ho sakti hain ya leak ho sakti hain.</p>
+            <!-- Left Column: Live Simulation -->
+            <div class="lg:col-span-5 flex flex-col gap-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-2xl sticky top-24">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="text-sm font-bold text-slate-200">Interactive Visual Diagram</h2>
+                        <span class="text-xs bg-emerald-950 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-700/80 font-mono">Live Physics Engine</span>
                     </div>
 
-                    <div class="bg-slate-900/80 p-4 rounded-lg border border-indigo-900/60">
-                        <h3 class="font-bold text-emerald-400 text-sm mb-1">2. EM Side-Channel Attacks (Cybersecurity)</h3>
-                        <p class="text-slate-300">Hackers CPU ya Hardware Disk se nikalne wali Electromagnetic (EM) Radiation ko analyze kar ke Encryption Keys (AES/RSA) chura lete hain. Disk ki electric field jan na zaroori hai taake **TEMPEST Shielding** banayi ja sakay.</p>
+                    <div class="relative w-full aspect-square bg-slate-950 rounded-xl overflow-hidden border border-slate-800 shadow-inner">
+                        <canvas id="diskCanvas" width="400" height="400" class="w-full h-full object-contain"></canvas>
                     </div>
 
-                    <div class="bg-slate-900/80 p-4 rounded-lg border border-indigo-900/60">
-                        <h3 class="font-bold text-amber-400 text-sm mb-1">3. Infinite Sheet Approx ($z \ll a$)</h3>
-                        <p class="text-slate-300">Jab distance $z$ boht chota hota hai, to formula $\vec{E} = \frac{\sigma}{2\varepsilon_0}$ ban jata hai. Yeh uniform field Touchscreens aur Sensors banane me istemal hoti hai.</p>
-                    </div>
+                    <div class="mt-5 flex flex-col gap-4">
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-400">Disk Radius ($a$):</span>
+                                <span id="valA" class="font-mono text-blue-400">5.0 cm</span>
+                            </div>
+                            <input type="range" id="sliderA" min="2" max="8" step="0.5" value="5" class="w-full accent-blue-500 cursor-pointer">
+                        </div>
 
-                    <div class="bg-slate-900/80 p-4 rounded-lg border border-indigo-900/60">
-                        <h3 class="font-bold text-purple-400 text-sm mb-1">4. Point Charge Approx ($z \gg a$)</h3>
-                        <p class="text-slate-300">Jab distance boht door hota hai, poori disk ek chote se Point Charge $E = \frac{k Q}{z^2}$ ki tarah behave karti hai, jo Antenna signals samajhne me help karta hai.</p>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-400">Distance Along Axis ($z$):</span>
+                                <span id="valZ" class="font-mono text-amber-400">4.0 cm</span>
+                            </div>
+                            <input type="range" id="sliderZ" min="1" max="9" step="0.5" value="4" class="w-full accent-amber-500 cursor-pointer">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-400">Active Ring Radius ($r$):</span>
+                                <span id="valR" class="font-mono text-emerald-400">3.0 cm</span>
+                            </div>
+                            <input type="range" id="sliderR" min="0.5" max="5" step="0.1" value="3" class="w-full accent-emerald-500 cursor-pointer">
+                        </div>
+
+                        <div class="bg-slate-800/80 p-3.5 rounded-xl border border-slate-700 flex justify-between items-center mt-1">
+                            <span class="text-xs font-medium text-slate-300">Total Electric Field ($E$):</span>
+                            <span id="fieldResult" class="text-base font-extrabold font-mono text-emerald-400">Calculating...</span>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Right Column: Step by Step Derivation -->
+            <div class="lg:col-span-7 flex flex-col gap-6">
+                
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-lg font-extrabold text-blue-400 mb-2 content-item"
+                        data-en="0. The Core Goal"
+                        data-ur="0. Hamara Main Maqsad Kya Hai?">
+                        0. Hamara Main Maqsad Kya Hai?
+                    </h2>
+                    <p class="text-sm text-slate-300 leading-relaxed content-item"
+                       data-en="We have a flat circular disk filled with electric charges. We want to calculate the total electric force field (E) pushing at a point P situated straight above the center at distance 'z'."
+                       data-ur="Hamare paas ek gol flat disk hai jiske upar electric charge phaila hua hai. Hum ne disk ke center ke exact upar (distance z par) point P par Electric Field (E) ki taqat maloom karni hai.">
+                       Hamare paas ek gol flat disk hai jiske upar electric charge phaila hua hai. Hum ne disk ke center ke exact upar (distance z par) point P par Electric Field (E) ki taqat maloom karni hai.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl border-l-4 border-l-blue-500">
+                    <h2 class="text-base font-bold text-blue-400 mb-2 content-item"
+                        data-en="Step 1: Slice Disk Into Concentric Rings"
+                        data-ur="Step 1: Disk ko Concentric Rings me Torna">
+                        Step 1: Disk ko Concentric Rings me Torna
+                    </h2>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
+                       data-en="Poori disk par ek sath math lagana mushkil hai. Is liye hum isay onion (pyaz) ki tarah concentric rings me divide karte hain. Radius 'r' aur width 'dr' wali ring ka charge 'dq' yeh hoga:"
+                       data-ur="Poori disk par ek sath math lagana mushkil hai. Is liye hum isay onion (pyaz) ki tarah concentric rings me divide karte hain. Radius 'r' aur width 'dr' wali ring ka charge 'dq' yeh hoga:">
+                       Poori disk par ek sath math lagana mushkil hai. Is liye hum isay onion (pyaz) ki tarah concentric rings me divide karte hain. Radius 'r' aur width 'dr' wali ring ka charge 'dq' yeh hoga:
+                    </p>
+                    <div class="math-box text-center text-amber-300 overflow-x-auto">
+                        $$dq = \sigma \cdot dA = \sigma (2\pi r \, dr)$$
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl border-l-4 border-l-amber-500">
+                    <h2 class="text-base font-bold text-amber-400 mb-2 content-item"
+                        data-en="Step 2: Single Ring Electric Field Formula"
+                        data-ur="Step 2: Ek Single Ring ki Electric Field ka Formula">
+                        Step 2: Ek Single Ring ki Electric Field ka Formula
+                    </h2>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
+                       data-en="A single charged ring produces electric field dE along the central axis. Note: Side ways push cancels out completely due to symmetry! Only vertical z-push remains."
+                       data-ur="Ek single charged ring apni field dE axis par lagati hai. Note: Right aur left side wale push symmetry ki wajah se aapas me cancel ho jaate hain, sirf vertical (z) push bachta hai!">
+                       Ek single charged ring apni field dE axis par lagati hai. Note: Right aur left side wale push symmetry ki wajah se aapas me cancel ho jaate hain, sirf vertical (z) push bachta hai!
+                    </p>
+                    <div class="math-box text-center text-amber-300 overflow-x-auto">
+                        $$dE = \frac{k \cdot dq \cdot z}{(z^2 + r^2)^{3/2}} = \frac{k \cdot (\sigma 2\pi r \, dr) \cdot z}{(z^2 + r^2)^{3/2}}$$
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl border-l-4 border-l-emerald-500">
+                    <h2 class="text-base font-bold text-emerald-400 mb-2 content-item"
+                        data-en="Step 3: Integrate All Rings from Center (0) to Edge (a)"
+                        data-ur="Step 3: Sab Rings ko Integrate (Jama) Karna">
+                        Step 3: Sab Rings ko Integrate (Jama) Karna
+                    </h2>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
+                       data-en="Now we use the integration sign ($\int$) as a sum machine to add all rings from center (r = 0) to disk edge (r = a). Constants are taken outside."
+                       data-ur="Ab hum integration sign ($\int$) ko sum machine ki tarah istemal karke center ($r = 0$) se le kar disk ke bahar wahi kinare ($r = a$) tak sab rings ki fields ko plus kar dete hain.">
+                       Ab hum integration sign ($\int$) ko sum machine ki tarah istemal karke center ($r = 0$) se le kar disk ke bahar wahi kinare ($r = a$) tak sab rings ki fields ko plus kar dete hain.
+                    </p>
+                    <div class="math-box text-center text-emerald-300 overflow-x-auto">
+                        $$E = k \sigma (2\pi) z \int_{0}^{a} \frac{r \, dr}{(z^2 + r^2)^{3/2}}$$
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl border-l-4 border-l-purple-500">
+                    <h2 class="text-base font-bold text-purple-400 mb-2 content-item"
+                        data-en="Step 4 & 5: Simple Substitution & Final Formula"
+                        data-ur="Step 4 & 5: U-Substitution aur Final Result">
+                        Step 4 & 5: U-Substitution aur Final Result
+                    </h2>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
+                       data-en="We substitute $t = z^2 + r^2 \implies dt = 2r \, dr$. Solving the integral and putting limits gives the famous disk formula:"
+                       data-ur="Hum $t = z^2 + r^2 \implies dt = 2r \, dr$ substitute karte hain jisse integration boht simple ho jati hai. Values solve karne par yeh final formula milta hai:">
+                       Hum $t = z^2 + r^2 \implies dt = 2r \, dr$ substitute karte hain jisse integration boht simple ho jati hai. Values solve karne par yeh final formula milta hai:
+                    </p>
+                    <div class="math-box text-center text-emerald-400 text-lg font-bold overflow-x-auto">
+                        $$\vec{E} = \frac{\sigma}{2\varepsilon_0} \left[ 1 - \frac{z}{\sqrt{z^2 + a^2}} \right] \hat{z}$$
+                    </div>
+                </div>
+
             </div>
 
         </div>
+
+        <!-- SECTION 3: CYBERSECURITY & REAL LIFE -->
+        <section class="bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 border border-indigo-800/80 rounded-2xl p-6 sm:p-8 shadow-2xl">
+            <div class="mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-indigo-300 bg-indigo-900/80 px-3 py-1 rounded-full border border-indigo-700">Real World & Hardware Security</span>
+                <h2 class="text-2xl font-extrabold text-indigo-200 mt-2">
+                    🛡️ Cybersecurity Aur Hardware Engineering Me Iska Kya Kaam?
+                </h2>
+                <p class="text-sm text-slate-300 mt-1">
+                    Physics ka yeh math Computer Hardware aur Hacking/Defense me kitna zaroori hai, aaiye dekhte hain:
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <div class="bg-slate-900/90 border border-indigo-900/70 rounded-xl p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="text-2xl mb-2">💻</div>
+                        <h3 class="font-bold text-blue-400 text-sm mb-1">Processor Chip Design</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            CPUs ke andar billions of tiny microscopic circular capacitors hote hain. Unki electric field ki calculation isi formula se hoti hai taake chip overheat ya short-circuit na ho.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-indigo-900/70 rounded-xl p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="text-2xl mb-2">🕵️‍♂️</div>
+                        <h3 class="font-bold text-emerald-400 text-sm mb-1">EM Side-Channel Attacks</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Hackers CPU chip se nikalne wali Electromagnetic (EM) Radiation ko analyze karke Encryption Keys (AES/RSA) chura lete hain.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-indigo-900/70 rounded-xl p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="text-2xl mb-2">🛡️</div>
+                        <h3 class="font-bold text-amber-400 text-sm mb-1">TEMPEST Shielding</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Disk ki exact electric field calculate karke Faraday Cages aur TEMPEST Shielding banayi jaati hai taake military aur bank servers ko EM attacks se bachaya jaye.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/90 border border-indigo-900/70 rounded-xl p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="text-2xl mb-2">📱</div>
+                        <h3 class="font-bold text-purple-400 text-sm mb-1">Touchscreens & Sensors</h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Jab distance $z$ boht chota ho ($z \ll a$), to formula $\vec{E} = \frac{\sigma}{2\varepsilon_0}$ ban jata hai. Yeh uniform field Capacitive Touchscreens me finger touch detect karti hai.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
     </main>
 
-    <!-- Script Section -->
+    <!-- JavaScript for Canvas Engine & Language Switching -->
     <script>
         let currentLang = 'ur';
 
-        // KaTeX Auto Render Trigger
         document.addEventListener("DOMContentLoaded", function() {
             renderMathInElement(document.body, {
                 delimiters: [
@@ -233,7 +344,6 @@
             });
         }
 
-        // Canvas & Math Logic
         const canvas = document.getElementById('diskCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -260,7 +370,7 @@
             valZ.innerText = z.toFixed(1) + ' cm';
             valR.innerText = r.toFixed(1) + ' cm';
 
-            // Formula Calculation
+            // Calculation
             const sigma = 5.0; // micro C/m2
             const eps0 = 8.854;
             const E = (sigma / (2 * (eps0 / 10))) * (1 - (z / Math.sqrt(z*z + a*a)));
@@ -272,7 +382,7 @@
             const centerY = 260;
             const scale = 22;
 
-            // 1. Draw Full Disk (Blue Base)
+            // 1. Full Disk
             ctx.save();
             ctx.beginPath();
             ctx.ellipse(centerX, centerY, a * scale, (a * scale) * 0.35, 0, 0, 2 * Math.PI);
@@ -283,7 +393,7 @@
             ctx.stroke();
             ctx.restore();
 
-            // 2. Draw Active Element Ring (Green Ring)
+            // 2. Active Element Ring
             ctx.save();
             ctx.beginPath();
             ctx.ellipse(centerX, centerY, r * scale, (r * scale) * 0.35, 0, 0, 2 * Math.PI);
@@ -312,7 +422,7 @@
             ctx.font = 'bold 12px Inter';
             ctx.fillText('Point P', centerX + 12, pointY + 4);
 
-            // 5. Electric Field Vector Arrow (Vertical Upwards)
+            // 5. Electric Field Vector Arrow
             ctx.beginPath();
             ctx.moveTo(centerX, pointY);
             ctx.lineTo(centerX, pointY - 45);
