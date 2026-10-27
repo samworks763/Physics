@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electric Field Due to Charged Disk - Interactive Guide</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-xl font-bold text-blue-400">⚡ Electric Field Due to a Charged Disk</h1>
+                <p class="text-xs text-slate-400">Step-by-Step Interactive Derivation & Visualizer</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <!-- Made by Subhan Badge -->
+                <span class="bg-slate-700 border border-slate-600 text-slate-200 text-xs font-medium px-3 py-1.5 rounded-lg shadow">
+                    ✨ Made by Subhan
+                </span>
+                <button id="langToggle" onclick="toggleLanguage()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow">
+                    🌐 Switch to Roman Urdu
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left Column: Interactive Visualizer & Controls -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
+            
+            <!-- Canvas Box -->
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 shadow-xl flex flex-col items-center">
+                <div class="w-full flex justify-between items-center mb-2">
+                    <h2 class="text-sm font-semibold text-slate-300">Live 2D Diagram & Vector Field</h2>
+                    <span class="text-xs bg-blue-900/60 text-blue-300 px-2 py-0.5 rounded border border-blue-700">Interactive</span>
+                </div>
+                <div class="relative w-full aspect-square bg-slate-950 rounded-lg overflow-hidden border border-slate-800 flex items-center justify-center">
+                    <canvas id="diskCanvas" width="400" height="400" class="w-full h-full object-contain"></canvas>
+                </div>
+                <p class="text-xs text-slate-400 mt-2 text-center">Shows disk radius ($a$), ring element ($r, dr$), and axis distance ($z$).</p>
+            </div>
+
+            <!-- Controls Box -->
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 shadow-xl flex flex-col gap-4">
+                <h2 class="text-sm font-semibold text-slate-300">Parameters Control</h2>
+                
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-400">Disk Radius ($a$):</span>
+                        <span id="valA" class="font-mono text-blue-400">5.0 cm</span>
+                    </div>
+                    <input type="range" id="sliderA" min="2" max="10" step="0.5" value="5" class="accent-blue-500 cursor-pointer">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-400">Axis Distance ($z$):</span>
+                        <span id="valZ" class="font-mono text-blue-400">4.0 cm</span>
+                    </div>
+                    <input type="range" id="sliderZ" min="1" max="10" step="0.5" value="4" class="accent-blue-500 cursor-pointer">
+                </div>
+
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 flex flex-col gap-1">
+                    <div class="text-xs text-slate-400">Calculated Electric Field ($E$):</div>
+                    <div id="fieldResult" class="text-base font-bold font-mono text-emerald-400">Loading...</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Column: Step-by-Step Derivation Breakdown -->
+        <div class="lg:col-span-7 flex flex-col gap-4">
+            
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
+                <h2 class="text-base font-bold text-blue-400 mb-2 content-title" data-en="Step 1: Breaking Disk into Thin Rings" data-ur="Step 1: Disk ko Chotay Rings me Torna">Step 1: Breaking Disk into Thin Rings</h2>
+                <p class="text-sm text-slate-300 content-desc mb-3" data-en="Instead of looking at the full solid plate at once, we divide the disk into concentric circular rings. For a ring of radius $r$ and thickness $dr$, the differential charge $dq$ is calculated using surface charge density $\sigma$." data-ur="Poori solid plate ko aik sath dekhne ke bajaye, hum disk ko concentric circular rings me divide karte hain. Radius $r$ aur thickness $dr$ wali ring ka charge $dq$ surface charge density $\sigma$ se nikalta hai.">
+                    Instead of looking at the full solid plate at once, we divide the disk into concentric circular rings. For a ring of radius $r$ and thickness $dr$, the differential charge $dq$ is calculated using surface charge density $\sigma$.
+                </p>
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 text-center font-mono text-sm text-amber-300 overflow-x-auto">
+                    $$dq = \sigma dA = \sigma (2\pi r \, dr)$$
+                </div>
+            </div>
+
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
+                <h2 class="text-base font-bold text-blue-400 mb-2 content-title" data-en="Step 2: Electric Field of a Charged Ring" data-ur="Step 2: Charged Ring ki Electric Field ka Formula">Step 2: Electric Field of a Charged Ring</h2>
+                <p class="text-sm text-slate-300 content-desc mb-3" data-en="Using the standard formula for electric field due to a ring along its axis at distance $z$, we substitute $dq$ into the field expression." data-ur="Ring ki wajah se uske axis par distance $z$ par electric field ka standard formula use karte hain, aur usme $dq$ ki value put kar dete hain.">
+                    Using the standard formula for electric field due to a ring along its axis at distance $z$, we substitute $dq$ into the field expression.
+                </p>
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 text-center font-mono text-sm text-amber-300 overflow-x-auto">
+                    $$dE = \frac{k \cdot dq \cdot z}{(z^2 + r^2)^{3/2}} = \frac{k \cdot (\sigma 2\pi r \, dr) \cdot z}{(z^2 + r^2)^{3/2}}$$
+                </div>
+            </div>
+
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
+                <h2 class="text-base font-bold text-blue-400 mb-2 content-title" data-en="Step 3: Integration from 0 to Radius $a$" data-ur="Step 3: 0 se Radius $a$ tak Integrate Karna">Step 3: Integration from 0 to Radius $a$</h2>
+                <p class="text-sm text-slate-300 content-desc mb-3" data-en="To find the total electric field for the entire disk, we integrate $dE$ from $r = 0$ to $r = a$ (disk radius). Constants are factored outside." data-ur="Poori disk ki field ke liye, hum $dE$ ko $r = 0$ se $r = a$ tak integrate karte hain. Constants ko bahar nikal lete hain.">
+                    To find the total electric field for the entire disk, we integrate $dE$ from $r = 0$ to $r = a$ (disk radius). Constants are factored outside.
+                </p>
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 text-center font-mono text-sm text-amber-300 overflow-x-auto">
+                    $$E = k \sigma (2\pi) z \int_{0}^{a} \frac{r \, dr}{(z^2 + r^2)^{3/2}}$$
+                </div>
+            </div>
+
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
+                <h2 class="text-base font-bold text-blue-400 mb-2 content-title" data-en="Step 4 & 5: Substitution & Final Result" data-ur="Step 4 & 5: Substitution aur Final Result">Step 4 & 5: Substitution & Final Result</h2>
+                <p class="text-sm text-slate-300 content-desc mb-3" data-en="Let $t = z^2 + r^2 \implies r \, dr = dt / 2$. Solving the integral and applying limits yields the exact standard disk formula." data-ur="Let $t = z^2 + r^2 \implies r \, dr = dt / 2$. Integral solve karke limits put karne par yeh final formula milta hai.">
+                    Let $t = z^2 + r^2 \implies r \, dr = dt / 2$. Solving the integral and applying limits yields the exact standard disk formula.
+                </p>
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 text-center font-mono text-sm text-emerald-300 overflow-x-auto">
+                    $$\vec{E} = \frac{\sigma}{2\varepsilon_0} \left[ 1 - \frac{z}{\sqrt{z^2 + a^2}} \right] \hat{z}$$
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- JavaScript for Canvas & Interactivity -->
+    <script>
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ur' : 'en';
+            const btn = document.getElementById('langToggle');
+            btn.innerText = currentLang === 'en' ? '🌐 Switch to Roman Urdu' : '🌐 Switch to English';
+
+            document.querySelectorAll('.content-title').forEach(el => {
+                el.innerText = el.getAttribute(`data-${currentLang}`);
+            });
+            document.querySelectorAll('.content-desc').forEach(el => {
+                el.innerText = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+
+        const canvas = document.getElementById('diskCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const sliderA = document.getElementById('sliderA');
+        const sliderZ = document.getElementById('sliderZ');
+        const valA = document.getElementById('valA');
+        const valZ = document.getElementById('valZ');
+        const fieldResult = document.getElementById('fieldResult');
+
+        function drawDiagram() {
+            const a = parseFloat(sliderA.value);
+            const z = parseFloat(sliderZ.value);
+
+            valA.innerText = a.toFixed(1) + ' cm';
+            valZ.innerText = z.toFixed(1) + ' cm';
+
+            // Constants assumed for calculation display
+            const sigma = 5.0; // micro C / m^2
+            const eps0 = 8.854;
+            const E = (sigma / (2 * (eps0/10))) * (1 - (z / Math.sqrt(z*z + a*a)));
+            fieldResult.innerText = E.toFixed(3) + " × 10⁵ N/C";
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const centerX = 200;
+            const centerY = 220;
+            const scale = 15;
+
+            // Draw Disk (Ellipse to show perspective)
+            ctx.save();
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY, a * scale, (a * scale) * 0.35, 0, 0, 2 * Math.PI);
+            ctx.fillStyle = 'rgba(59, 130, 246, 0.2)';
+            ctx.fill();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#60a5fa';
+            ctx.stroke();
+            ctx.restore();
+
+            // Center axis line (z-axis)
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(centerX, centerY - (z * scale));
+            ctx.strokeStyle = '#f59e0b';
+            ctx.setLineDash([4, 4]);
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Point P on axis
+            const pointY = centerY - (z * scale);
+            ctx.beginPath();
+            ctx.arc(centerX, pointY, 6, 0, 2 * Math.PI);
+            ctx.fillStyle = '#ef4444';
+            ctx.fill();
+            
+            ctx.fillStyle = '#f87171';
+            ctx.font = '12px Inter';
+            ctx.fillText('P (Point)', centerX + 10, pointY + 4);
+
+            // Labels
+            ctx.fillStyle = '#94a3b8';
+            ctx.fillText(`z = ${z}cm`, centerX - 35, centerY - (z * scale) / 2);
+            ctx.fillText(`Disk Radius a = ${a}cm`, centerX - 40, centerY + 30);
+        }
+
+        sliderA.addEventListener('input', drawDiagram);
+        sliderZ.addEventListener('input', drawDiagram);
+
+        // Initial Draw
+        drawDiagram();
+    </script>
+</body>
+</html>
