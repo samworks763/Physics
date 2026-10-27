@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electric Field Due to Charged Disk - Interactive Guide</title>
+    <title>Electric Field Due to Charged Disk - Ultimate Interactive Guide</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- KaTeX for Math Rendering -->
+    <!-- KaTeX CSS & JS for Perfect Math Rendering -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .math-box { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.5rem; padding: 0.75rem; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen">
+<body class="min-h-screen pb-12">
 
     <!-- Header -->
-    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-md">
+    <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div>
-                <h1 class="text-xl font-bold text-blue-400">⚡ Electric Field Due to a Charged Disk</h1>
-                <p class="text-xs text-slate-400">Step-by-Step Interactive Derivation & Visualizer</p>
+                <h1 class="text-2xl font-bold text-blue-400">⚡ Electric Field Due to Charged Disk</h1>
+                <p class="text-xs text-slate-400">Zero se Level 100 tak Step-by-Step Graphical Explanation</p>
             </div>
             <div class="flex items-center gap-3">
-                <!-- Made by Subhan Badge -->
-                <span class="bg-slate-700 border border-slate-600 text-slate-200 text-xs font-medium px-3 py-1.5 rounded-lg shadow">
+                <span class="bg-blue-900/60 border border-blue-600 text-blue-300 text-xs font-semibold px-3 py-1.5 rounded-lg shadow">
                     ✨ Made by Subhan
                 </span>
-                <button id="langToggle" onclick="toggleLanguage()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow">
-                    🌐 Switch to Roman Urdu
+                <button id="langToggle" onclick="toggleLanguage()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow">
+                    🌐 Switch to English
                 </button>
             </div>
         </div>
@@ -38,89 +38,168 @@
 
     <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <!-- Left Column: Interactive Visualizer & Controls -->
+        <!-- Left Sticky Column: Interactive Canvas & Sliders -->
         <div class="lg:col-span-5 flex flex-col gap-6">
             
-            <!-- Canvas Box -->
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 shadow-xl flex flex-col items-center">
-                <div class="w-full flex justify-between items-center mb-2">
-                    <h2 class="text-sm font-semibold text-slate-300">Live 2D Diagram & Vector Field</h2>
-                    <span class="text-xs bg-blue-900/60 text-blue-300 px-2 py-0.5 rounded border border-blue-700">Interactive</span>
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 shadow-xl sticky top-24">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-sm font-semibold text-slate-200">Interactive 2D/3D Canvas</h2>
+                    <span class="text-xs bg-emerald-950 text-emerald-400 px-2 py-0.5 rounded border border-emerald-700">Live Simulation</span>
                 </div>
-                <div class="relative w-full aspect-square bg-slate-950 rounded-lg overflow-hidden border border-slate-800 flex items-center justify-center">
+                
+                <div class="relative w-full aspect-square bg-slate-950 rounded-lg overflow-hidden border border-slate-800">
                     <canvas id="diskCanvas" width="400" height="400" class="w-full h-full object-contain"></canvas>
                 </div>
-                <p class="text-xs text-slate-400 mt-2 text-center">Shows disk radius ($a$), ring element ($r, dr$), and axis distance ($z$).</p>
-            </div>
 
-            <!-- Controls Box -->
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 shadow-xl flex flex-col gap-4">
-                <h2 class="text-sm font-semibold text-slate-300">Parameters Control</h2>
-                
-                <div class="flex flex-col gap-1">
-                    <div class="flex justify-between text-xs">
-                        <span class="text-slate-400">Disk Radius ($a$):</span>
-                        <span id="valA" class="font-mono text-blue-400">5.0 cm</span>
+                <!-- Controls -->
+                <div class="mt-4 flex flex-col gap-3">
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-slate-400">Disk Radius (<span class="math-inline">a</span>):</span>
+                            <span id="valA" class="font-mono text-blue-400">5.0 cm</span>
+                        </div>
+                        <input type="range" id="sliderA" min="2" max="8" step="0.5" value="5" class="w-full accent-blue-500 cursor-pointer">
                     </div>
-                    <input type="range" id="sliderA" min="2" max="10" step="0.5" value="5" class="accent-blue-500 cursor-pointer">
-                </div>
 
-                <div class="flex flex-col gap-1">
-                    <div class="flex justify-between text-xs">
-                        <span class="text-slate-400">Axis Distance ($z$):</span>
-                        <span id="valZ" class="font-mono text-blue-400">4.0 cm</span>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-slate-400">Axis Distance (<span class="math-inline">z</span>):</span>
+                            <span id="valZ" class="font-mono text-amber-400">4.0 cm</span>
+                        </div>
+                        <input type="range" id="sliderZ" min="1" max="9" step="0.5" value="4" class="w-full accent-amber-500 cursor-pointer">
                     </div>
-                    <input type="range" id="sliderZ" min="1" max="10" step="0.5" value="4" class="accent-blue-500 cursor-pointer">
-                </div>
 
-                <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 flex flex-col gap-1">
-                    <div class="text-xs text-slate-400">Calculated Electric Field ($E$):</div>
-                    <div id="fieldResult" class="text-base font-bold font-mono text-emerald-400">Loading...</div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-slate-400">Active Ring Element Radius (<span class="math-inline">r</span>):</span>
+                            <span id="valR" class="font-mono text-emerald-400">3.0 cm</span>
+                        </div>
+                        <input type="range" id="sliderR" min="0.5" max="5" step="0.1" value="3" class="w-full accent-emerald-500 cursor-pointer">
+                    </div>
+
+                    <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 flex justify-between items-center mt-2">
+                        <span class="text-xs text-slate-400">Total Field Strength (<span class="math-inline">E</span>):</span>
+                        <span id="fieldResult" class="text-base font-bold font-mono text-emerald-400">Calculating...</span>
+                    </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- Right Column: Step-by-Step Derivation Breakdown -->
-        <div class="lg:col-span-7 flex flex-col gap-4">
+        <!-- Right Column: Step-by-Step Simple Explanation -->
+        <div class="lg:col-span-7 flex flex-col gap-6">
             
+            <!-- Intro / Base Concept -->
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
-                <h2 class="text-base font-bold text-blue-400 mb-2 content-title" data-en="Step 1: Breaking Disk into Thin Rings" data-ur="Step 1: Disk ko Chotay Rings me Torna">Step 1: Breaking Disk into Thin Rings</h2>
-                <p class="text-sm text-slate-300 content-desc mb-3" data-en="Instead of looking at the full solid plate at once, we divide the disk into concentric circular rings. For a ring of radius $r$ and thickness $dr$, the differential charge $dq$ is calculated using surface charge density $\sigma$." data-ur="Poori solid plate ko aik sath dekhne ke bajaye, hum disk ko concentric circular rings me divide karte hain. Radius $r$ aur thickness $dr$ wali ring ka charge $dq$ surface charge density $\sigma$ se nikalta hai.">
-                    Instead of looking at the full solid plate at once, we divide the disk into concentric circular rings. For a ring of radius $r$ and thickness $dr$, the differential charge $dq$ is calculated using surface charge density $\sigma$.
+                <h2 class="text-lg font-bold text-blue-400 mb-2 content-item" 
+                    data-en="0. Basic Concept: What is a Charged Disk?" 
+                    data-ur="0. Bunyadi Cheez: Charged Disk Kya Hoti Hai?">
+                    0. Bunyadi Cheez: Charged Disk Kya Hoti Hai?
+                </h2>
+                <p class="text-sm text-slate-300 leading-relaxed content-item"
+                   data-en="Imagine a flat CD or coin where electric charge is evenly spread over its surface. We want to find the total push/pull force (Electric Field) at point P located directly above the center."
+                   data-ur="Aap samjho ke ek flat CD ya coin hai jiske poore surface par charge barabar phaila hua hai. Hum ne is disk ke exact center ke upar (distance z par) point P par total Electric Field (E) ki taqat maloom karni hai.">
+                   Aap samjho ke ek flat CD ya coin hai jiske poore surface par charge barabar phaila hua hai. Hum ne is disk ke exact center ke upar (distance z par) point P par total Electric Field (E) ki taqat maloom karni hai.
                 </p>
-                <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 text-center font-mono text-sm text-amber-300 overflow-x-auto">
-                    $$dq = \sigma dA = \sigma (2\pi r \, dr)$$
+            </div>
+
+            <!-- Step 1 -->
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl border-l-4 border-l-blue-500">
+                <h2 class="text-base font-bold text-blue-400 mb-2 content-item"
+                    data-en="Step 1: Slice Disk into Thin Concentric Rings"
+                    data-ur="Step 1: Disk ko Chote Rings me Torna (Breakdown)">
+                    Step 1: Disk ko Chote Rings me Torna (Breakdown)
+                </h2>
+                <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
+                   data-en="Poori solid disk par ek sath math lagana mushkil hai. Is liye hum maante hain ke disk buhut saare patle patle gol 'Rings' se mil kar bani hai. Ring ka radius 'r' aur width 'dr' hai."
+                   data-ur="Poori solid disk par ek sath math lagana mushkil hai. Is liye hum maante hain ke disk buhut saare patle patle gol 'Rings' se mil kar bani hai. Ring ka radius 'r' aur width 'dr' hai.">
+                   Poori solid disk par ek sath math lagana mushkil hai. Is liye hum maante hain ke disk buhut saare patle patle gol 'Rings' se mil kar bani hai. Ring ka radius 'r' aur width 'dr' hai.
+                </p>
+                <div class="math-box text-center text-amber-300 overflow-x-auto">
+                    $$dq = \sigma \cdot dA = \sigma (2\pi r \, dr)$$
                 </div>
             </div>
 
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
-                <h2 class="text-base font-bold text-blue-400 mb-2 content-title" data-en="Step 2: Electric Field of a Charged Ring" data-ur="Step 2: Charged Ring ki Electric Field ka Formula">Step 2: Electric Field of a Charged Ring</h2>
-                <p class="text-sm text-slate-300 content-desc mb-3" data-en="Using the standard formula for electric field due to a ring along its axis at distance $z$, we substitute $dq$ into the field expression." data-ur="Ring ki wajah se uske axis par distance $z$ par electric field ka standard formula use karte hain, aur usme $dq$ ki value put kar dete hain.">
-                    Using the standard formula for electric field due to a ring along its axis at distance $z$, we substitute $dq$ into the field expression.
+            <!-- Step 2 -->
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl border-l-4 border-l-amber-500">
+                <h2 class="text-base font-bold text-amber-400 mb-2 content-item"
+                    data-en="Step 2: Formula for 1 Single Charged Ring"
+                    data-ur="Step 2: Aik Single Charged Ring ki Electric Field">
+                    Step 2: Aik Single Charged Ring ki Electric Field
+                </h2>
+                <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
+                   data-en="Pehle se maloom ring ke formula me hum bas is chote charge 'dq' ki value put karte hain. Note: Side wale components cancel ho jaate hain, bas vertical axis wala component (z) bachta hai!"
+                   data-ur="Pehle se maloom ring ke formula me hum bas is chote charge 'dq' ki value put karte hain. Note: Side wale components cancel ho jaate hain, bas vertical axis wala component (z) bachta hai!">
+                   Pehle se maloom ring ke formula me hum bas is chote charge 'dq' ki value put karte hain. Note: Side wale components cancel ho jaate hain, bas vertical axis wala component (z) bachta hai!
                 </p>
-                <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 text-center font-mono text-sm text-amber-300 overflow-x-auto">
+                <div class="math-box text-center text-amber-300 overflow-x-auto">
                     $$dE = \frac{k \cdot dq \cdot z}{(z^2 + r^2)^{3/2}} = \frac{k \cdot (\sigma 2\pi r \, dr) \cdot z}{(z^2 + r^2)^{3/2}}$$
                 </div>
             </div>
 
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
-                <h2 class="text-base font-bold text-blue-400 mb-2 content-title" data-en="Step 3: Integration from 0 to Radius $a$" data-ur="Step 3: 0 se Radius $a$ tak Integrate Karna">Step 3: Integration from 0 to Radius $a$</h2>
-                <p class="text-sm text-slate-300 content-desc mb-3" data-en="To find the total electric field for the entire disk, we integrate $dE$ from $r = 0$ to $r = a$ (disk radius). Constants are factored outside." data-ur="Poori disk ki field ke liye, hum $dE$ ko $r = 0$ se $r = a$ tak integrate karte hain. Constants ko bahar nikal lete hain.">
-                    To find the total electric field for the entire disk, we integrate $dE$ from $r = 0$ to $r = a$ (disk radius). Constants are factored outside.
+            <!-- Step 3 -->
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl border-l-4 border-l-emerald-500">
+                <h2 class="text-base font-bold text-emerald-400 mb-2 content-title"
+                    data-en="Step 3: Integrate All Rings from Center (0) to Edge (a)"
+                    data-ur="Step 3: Tamaam Rings ko Center (0) se Kinare (a) tak Jorna (Integration)">
+                    Step 3: Tamaam Rings ko Center (0) se Kinare (a) tak Jorna (Integration)
+                </h2>
+                <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
+                   data-en="Integration ka matlab hai saare rings ki fields ko aapas me plus kar dena. Constant variables ko integration se bahar nikal lete hain."
+                   data-ur="Integration ka matlab hai saare rings ki fields ko aapas me plus kar dena. Constant variables ko integration se bahar nikal lete hain.">
+                   Integration ka matlab hai saare rings ki fields ko aapas me plus kar dena. Constant variables ko integration se bahar nikal lete hain.
                 </p>
-                <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 text-center font-mono text-sm text-amber-300 overflow-x-auto">
+                <div class="math-box text-center text-emerald-300 overflow-x-auto">
                     $$E = k \sigma (2\pi) z \int_{0}^{a} \frac{r \, dr}{(z^2 + r^2)^{3/2}}$$
                 </div>
             </div>
 
-            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
-                <h2 class="text-base font-bold text-blue-400 mb-2 content-title" data-en="Step 4 & 5: Substitution & Final Result" data-ur="Step 4 & 5: Substitution aur Final Result">Step 4 & 5: Substitution & Final Result</h2>
-                <p class="text-sm text-slate-300 content-desc mb-3" data-en="Let $t = z^2 + r^2 \implies r \, dr = dt / 2$. Solving the integral and applying limits yields the exact standard disk formula." data-ur="Let $t = z^2 + r^2 \implies r \, dr = dt / 2$. Integral solve karke limits put karne par yeh final formula milta hai.">
-                    Let $t = z^2 + r^2 \implies r \, dr = dt / 2$. Solving the integral and applying limits yields the exact standard disk formula.
+            <!-- Step 4 -->
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl border-l-4 border-l-purple-500">
+                <h2 class="text-base font-bold text-purple-400 mb-2 content-item"
+                    data-en="Step 4 & 5: U-Substitution & Final Result"
+                    data-ur="Step 4 & 5: Simple Integration Solve & Final Result">
+                    Step 4 & 5: Simple Integration Solve & Final Result
+                </h2>
+                <p class="text-sm text-slate-300 leading-relaxed mb-3 content-item"
+                   data-en="Hum $t = z^2 + r^2$ substitute karte hain jisse integration boht asaan ho jati hai. Value solve karne par final formula milta hai:"
+                   data-ur="Hum $t = z^2 + r^2$ substitute karte hain jisse integration boht asaan ho jati hai. Value solve karne par final formula milta hai:">
+                   Hum $t = z^2 + r^2$ substitute karte hain jisse integration boht asaan ho jati hai. Value solve karne par final formula milta hai:
                 </p>
-                <div class="bg-slate-900 p-3 rounded-lg border border-slate-700 text-center font-mono text-sm text-emerald-300 overflow-x-auto">
+                <div class="math-box text-center text-emerald-400 text-base font-bold overflow-x-auto">
                     $$\vec{E} = \frac{\sigma}{2\varepsilon_0} \left[ 1 - \frac{z}{\sqrt{z^2 + a^2}} \right] \hat{z}$$
+                </div>
+            </div>
+
+            <!-- Why is this Important? Real Life & Cybersecurity -->
+            <div class="bg-gradient-to-r from-slate-800 to-indigo-950 border border-indigo-700 rounded-xl p-6 shadow-2xl">
+                <h2 class="text-xl font-bold text-indigo-300 mb-3 flex items-center gap-2">
+                    🛡️ Yeh Real Life Aur Cybersecurity Me Kyun Zarori Hai?
+                </h2>
+                <p class="text-sm text-slate-300 mb-4 leading-relaxed">
+                    Aap soch rahe honge ke yeh physics ka math Cybersecurity ya Computer Hardware me kahan kaam aata hai? Dehyan se samjhein:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="bg-slate-900/80 p-4 rounded-lg border border-indigo-900/60">
+                        <h3 class="font-bold text-blue-400 text-sm mb-1">1. Hardware & Chip Design (Microprocessors)</h3>
+                        <p class="text-slate-300">Modern CPU chips aur Transistors ke andar circular micro-capacitors aur metal disks hoti hain. Unki electric field calculate kiye bagair microchips burn ho sakti hain ya leak ho sakti hain.</p>
+                    </div>
+
+                    <div class="bg-slate-900/80 p-4 rounded-lg border border-indigo-900/60">
+                        <h3 class="font-bold text-emerald-400 text-sm mb-1">2. EM Side-Channel Attacks (Cybersecurity)</h3>
+                        <p class="text-slate-300">Hackers CPU ya Hardware Disk se nikalne wali Electromagnetic (EM) Radiation ko analyze kar ke Encryption Keys (AES/RSA) chura lete hain. Disk ki electric field jan na zaroori hai taake **TEMPEST Shielding** banayi ja sakay.</p>
+                    </div>
+
+                    <div class="bg-slate-900/80 p-4 rounded-lg border border-indigo-900/60">
+                        <h3 class="font-bold text-amber-400 text-sm mb-1">3. Infinite Sheet Approx ($z \ll a$)</h3>
+                        <p class="text-slate-300">Jab distance $z$ boht chota hota hai, to formula $\vec{E} = \frac{\sigma}{2\varepsilon_0}$ ban jata hai. Yeh uniform field Touchscreens aur Sensors banane me istemal hoti hai.</p>
+                    </div>
+
+                    <div class="bg-slate-900/80 p-4 rounded-lg border border-indigo-900/60">
+                        <h3 class="font-bold text-purple-400 text-sm mb-1">4. Point Charge Approx ($z \gg a$)</h3>
+                        <p class="text-slate-300">Jab distance boht door hota hai, poori disk ek chote se Point Charge $E = \frac{k Q}{z^2}$ ki tarah behave karti hai, jo Antenna signals samajhne me help karta hai.</p>
+                    </div>
                 </div>
             </div>
 
@@ -128,94 +207,134 @@
 
     </main>
 
-    <!-- JavaScript for Canvas & Interactivity -->
+    <!-- Script Section -->
     <script>
-        let currentLang = 'en';
+        let currentLang = 'ur';
+
+        // KaTeX Auto Render Trigger
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+            drawDiagram();
+        });
 
         function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'ur' : 'en';
             const btn = document.getElementById('langToggle');
             btn.innerText = currentLang === 'en' ? '🌐 Switch to Roman Urdu' : '🌐 Switch to English';
 
-            document.querySelectorAll('.content-title').forEach(el => {
-                el.innerText = el.getAttribute(`data-${currentLang}`);
-            });
-            document.querySelectorAll('.content-desc').forEach(el => {
-                el.innerText = el.getAttribute(`data-${currentLang}`);
+            document.querySelectorAll('.content-item').forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) el.innerText = text;
             });
         }
 
+        // Canvas & Math Logic
         const canvas = document.getElementById('diskCanvas');
         const ctx = canvas.getContext('2d');
 
         const sliderA = document.getElementById('sliderA');
         const sliderZ = document.getElementById('sliderZ');
+        const sliderR = document.getElementById('sliderR');
+
         const valA = document.getElementById('valA');
         const valZ = document.getElementById('valZ');
+        const valR = document.getElementById('valR');
         const fieldResult = document.getElementById('fieldResult');
 
         function drawDiagram() {
             const a = parseFloat(sliderA.value);
             const z = parseFloat(sliderZ.value);
+            let r = parseFloat(sliderR.value);
+
+            if (r > a) {
+                r = a;
+                sliderR.value = a;
+            }
 
             valA.innerText = a.toFixed(1) + ' cm';
             valZ.innerText = z.toFixed(1) + ' cm';
+            valR.innerText = r.toFixed(1) + ' cm';
 
-            // Constants assumed for calculation display
-            const sigma = 5.0; // micro C / m^2
+            // Formula Calculation
+            const sigma = 5.0; // micro C/m2
             const eps0 = 8.854;
-            const E = (sigma / (2 * (eps0/10))) * (1 - (z / Math.sqrt(z*z + a*a)));
+            const E = (sigma / (2 * (eps0 / 10))) * (1 - (z / Math.sqrt(z*z + a*a)));
             fieldResult.innerText = E.toFixed(3) + " × 10⁵ N/C";
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             const centerX = 200;
-            const centerY = 220;
-            const scale = 15;
+            const centerY = 260;
+            const scale = 22;
 
-            // Draw Disk (Ellipse to show perspective)
+            // 1. Draw Full Disk (Blue Base)
             ctx.save();
             ctx.beginPath();
             ctx.ellipse(centerX, centerY, a * scale, (a * scale) * 0.35, 0, 0, 2 * Math.PI);
-            ctx.fillStyle = 'rgba(59, 130, 246, 0.2)';
+            ctx.fillStyle = 'rgba(59, 130, 246, 0.15)';
             ctx.fill();
             ctx.lineWidth = 2;
-            ctx.strokeStyle = '#60a5fa';
+            ctx.strokeStyle = '#3b82f6';
             ctx.stroke();
             ctx.restore();
 
-            // Center axis line (z-axis)
+            // 2. Draw Active Element Ring (Green Ring)
+            ctx.save();
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY, r * scale, (r * scale) * 0.35, 0, 0, 2 * Math.PI);
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#10b981';
+            ctx.stroke();
+            ctx.restore();
+
+            // 3. Center Axis Line (z-axis)
+            const pointY = centerY - (z * scale);
             ctx.beginPath();
             ctx.moveTo(centerX, centerY);
-            ctx.lineTo(centerX, centerY - (z * scale));
+            ctx.lineTo(centerX, pointY);
             ctx.strokeStyle = '#f59e0b';
             ctx.setLineDash([4, 4]);
             ctx.lineWidth = 2;
             ctx.stroke();
             ctx.setLineDash([]);
 
-            // Point P on axis
-            const pointY = centerY - (z * scale);
+            // 4. Point P
             ctx.beginPath();
             ctx.arc(centerX, pointY, 6, 0, 2 * Math.PI);
             ctx.fillStyle = '#ef4444';
             ctx.fill();
-            
-            ctx.fillStyle = '#f87171';
-            ctx.font = '12px Inter';
-            ctx.fillText('P (Point)', centerX + 10, pointY + 4);
+            ctx.fillStyle = '#fca5a5';
+            ctx.font = 'bold 12px Inter';
+            ctx.fillText('Point P', centerX + 12, pointY + 4);
 
-            // Labels
-            ctx.fillStyle = '#94a3b8';
-            ctx.fillText(`z = ${z}cm`, centerX - 35, centerY - (z * scale) / 2);
-            ctx.fillText(`Disk Radius a = ${a}cm`, centerX - 40, centerY + 30);
+            // 5. Electric Field Vector Arrow (Vertical Upwards)
+            ctx.beginPath();
+            ctx.moveTo(centerX, pointY);
+            ctx.lineTo(centerX, pointY - 45);
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Arrowhead
+            ctx.beginPath();
+            ctx.moveTo(centerX - 5, pointY - 38);
+            ctx.lineTo(centerX, pointY - 48);
+            ctx.lineTo(centerX + 5, pointY - 38);
+            ctx.fillStyle = '#10b981';
+            ctx.fill();
+
+            ctx.fillStyle = '#6ee7b7';
+            ctx.fillText('Net E Field', centerX + 10, pointY - 30);
         }
 
         sliderA.addEventListener('input', drawDiagram);
         sliderZ.addEventListener('input', drawDiagram);
-
-        // Initial Draw
-        drawDiagram();
+        sliderR.addEventListener('input', drawDiagram);
     </script>
 </body>
 </html>
